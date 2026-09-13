@@ -1,0 +1,618 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* =========================
+   MAIN BACKGROUND
+========================= */
+
+.sky {
+    position: relative;
+    width: 100vw;
+    height: 100dvh;
+
+    background: linear-gradient(
+        to bottom,
+        #f9e8f2 0%,
+        #fceef2 55%,
+        #fff4e8 100%
+    );
+
+    overflow: hidden;
+}
+
+/* =========================
+   INTRO CARD
+========================= */
+
+.card {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: min(90%, 520px);
+
+    transform: translate(-50%, -55%);
+
+    text-align: center;
+
+    z-index: 20;
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+.card.hide {
+    opacity: 0;
+    transform: translate(-50%, -60%) scale(0.9);
+    pointer-events: none;
+}
+
+/* Baby blue heart */
+
+.small-flower {
+    font-size: 58px;
+
+    margin-bottom: 12px;
+
+    animation: float 3s ease-in-out infinite;
+}
+
+h1 {
+    font-size: clamp(40px, 8vw, 68px);
+
+    font-weight: 700;
+
+    letter-spacing: -2px;
+
+    color: #4b3b40;
+
+    margin-bottom: 14px;
+}
+
+.subtitle {
+    font-size: 21px;
+
+    color: #66545a;
+
+    margin-bottom: 8px;
+}
+
+.tiny-text {
+    font-size: 14px;
+
+    color: #927f85;
+
+    margin-bottom: 28px;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+button {
+    border: none;
+
+    background: #bde9ff;
+
+    color: #405c68;
+
+    padding: 16px 28px;
+
+    border-radius: 50px;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 25px rgba(70, 150, 180, 0.18);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+button:hover {
+    transform: translateY(-4px) scale(1.04);
+
+    background: #aee3fb;
+
+    box-shadow:
+        0 14px 35px rgba(70, 150, 180, 0.25);
+}
+
+button:active {
+    transform: scale(0.94);
+}
+
+/* =========================
+   GRASS
+========================= */
+
+.ground {
+    position: absolute;
+
+    left: -5%;
+    bottom: -70px;
+
+    width: 110%;
+    height: 170px;
+
+    background: #dce8c9;
+
+    border-radius: 50% 50% 0 0;
+
+    z-index: 3;
+}
+
+/* =========================
+   SPARKLES
+========================= */
+
+.sparkle {
+    position: absolute;
+
+    color: white;
+
+    font-size: 24px;
+
+    opacity: 0.7;
+
+    z-index: 2;
+
+    animation: sparkle 3s ease-in-out infinite;
+}
+
+.sparkle-1 {
+    top: 20%;
+    left: 15%;
+}
+
+.sparkle-2 {
+    top: 30%;
+    right: 18%;
+
+    animation-delay: 1s;
+}
+
+.sparkle-3 {
+    top: 65%;
+    left: 25%;
+
+    animation-delay: 2s;
+}
+
+/* =========================
+   FLOWERS
+========================= */
+
+.flower {
+    position: absolute;
+
+    bottom: 55px;
+
+    z-index: 8;
+
+    cursor: pointer;
+
+    user-select: none;
+
+    opacity: 0;
+
+    transform:
+        translateY(120px)
+        scale(0);
+
+    animation:
+        growFlower 1s cubic-bezier(.17,.89,.32,1.28) forwards,
+        flowerBounce 3s ease-in-out infinite 1s;
+
+    transition:
+        filter 0.2s ease;
+}
+
+.flower:hover {
+    filter:
+        drop-shadow(
+            0 8px 10px rgba(80, 120, 140, 0.25)
+        );
+}
+
+/* Flower growth */
+
+@keyframes growFlower {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(120px)
+            scale(0);
+    }
+
+    70% {
+        opacity: 1;
+
+        transform:
+            translateY(-10px)
+            scale(1.15);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+/* Gentle flower movement */
+
+@keyframes flowerBounce {
+
+    0%,
+    100% {
+        margin-bottom: 0;
+    }
+
+    50% {
+        margin-bottom: 7px;
+    }
+}
+
+/* =========================
+   BUTTERFLIES
+========================= */
+
+.butterfly {
+    position: absolute;
+
+    left: -10%;
+
+    bottom: 25%;
+
+    z-index: 12;
+
+    font-size: 30px;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    animation-name: butterflyFly;
+
+    animation-timing-function: ease-in-out;
+
+    animation-iteration-count: infinite;
+}
+
+
+/* Butterfly flies
+   from LEFT → RIGHT */
+
+@keyframes butterflyFly {
+
+    0% {
+        left: -10%;
+        bottom: 25%;
+
+        opacity: 0;
+
+        transform:
+            rotate(-15deg)
+            scale(0.8);
+    }
+
+    8% {
+        opacity: 1;
+    }
+
+    20% {
+        left: 10%;
+        bottom: 45%;
+
+        transform:
+            rotate(10deg)
+            scale(1);
+    }
+
+    35% {
+        left: 30%;
+        bottom: 35%;
+
+        transform:
+            rotate(-8deg)
+            scale(1.05);
+    }
+
+    50% {
+        left: 50%;
+        bottom: 55%;
+
+        transform:
+            rotate(10deg)
+            scale(0.95);
+    }
+
+    65% {
+        left: 68%;
+        bottom: 40%;
+
+        transform:
+            rotate(-10deg)
+            scale(1.05);
+    }
+
+    80% {
+        left: 88%;
+        bottom: 58%;
+
+        transform:
+            rotate(8deg)
+            scale(0.95);
+    }
+
+    92% {
+        opacity: 1;
+    }
+
+    100% {
+        left: 110%;
+        bottom: 70%;
+
+        opacity: 0;
+
+        transform:
+            rotate(-5deg)
+            scale(0.8);
+    }
+}
+
+/* =========================
+   SURPRISE PAGE
+========================= */
+
+.surprise-page {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 25px;
+
+    text-align: center;
+
+    opacity: 0;
+
+    transform: scale(1.05);
+
+    pointer-events: none;
+
+    z-index: 30;
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
+}
+
+.surprise-page.show {
+    opacity: 1;
+
+    transform: scale(1);
+
+    pointer-events: auto;
+}
+
+.surprise-content {
+    width: min(90%, 500px);
+}
+
+.heart {
+    font-size: 60px;
+
+    margin-bottom: 15px;
+
+    animation:
+        heartFloat 2.5s ease-in-out infinite;
+}
+
+.surprise-content h2 {
+    font-size: clamp(42px, 10vw, 70px);
+
+    color: #4b3b40;
+
+    margin-bottom: 15px;
+}
+
+.surprise-content p {
+    color: #66545a;
+
+    font-size: 19px;
+
+    line-height: 1.6;
+}
+
+/* =========================
+   HEART ANIMATION
+========================= */
+
+@keyframes heartFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translateY(-10px)
+            scale(1.05);
+    }
+}
+
+/* =========================
+   SPARKLE ANIMATION
+========================= */
+
+@keyframes sparkle {
+
+    0%,
+    100% {
+        opacity: 0.2;
+
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+
+        transform: scale(1.2);
+    }
+}
+
+/* =========================
+   FLOATING HEART
+========================= */
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* =========================
+   PHONE OPTIMIZATION
+========================= */
+
+@media (max-width: 600px) {
+
+    .sky {
+        min-height: 100dvh;
+    }
+
+    .card {
+        width: 88%;
+    }
+
+    .small-flower {
+        font-size: 48px;
+
+        margin-bottom: 8px;
+    }
+
+    h1 {
+        font-size: 42px;
+
+        letter-spacing: -1px;
+    }
+
+    .subtitle {
+        font-size: 18px;
+
+        line-height: 1.4;
+    }
+
+    .tiny-text {
+        font-size: 13px;
+
+        margin-bottom: 23px;
+    }
+
+    button {
+        padding: 15px 23px;
+
+        font-size: 15px;
+    }
+
+    .ground {
+        bottom: -50px;
+
+        height: 125px;
+    }
+
+    .flower {
+        bottom: 45px;
+    }
+
+    .butterfly {
+        font-size: 24px;
+    }
+
+    .surprise-content {
+        width: 90%;
+    }
+
+    .heart {
+        font-size: 50px;
+    }
+
+    .surprise-content h2 {
+        font-size: 46px;
+    }
+
+    .surprise-content p {
+        font-size: 17px;
+
+        line-height: 1.5;
+    }
+}
+
+/* =========================
+   VERY SMALL PHONES
+========================= */
+
+@media (max-height: 650px) {
+
+    .card {
+        transform: translate(-50%, -50%);
+    }
+
+    .small-flower {
+        font-size: 42px;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+
+    .subtitle {
+        font-size: 16px;
+    }
+
+    .tiny-text {
+        margin-bottom: 18px;
+    }
+}
